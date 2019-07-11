@@ -1,0 +1,27 @@
+{
+  "name": "wowbot",
+  "version": "1.0.0",
+  "description": "A Discord Bot for WoW Discord servers written in Node JS with MongoDB integration ",
+  "main": "index.js",
+  "scripts": {
+     "start": "node index.js",
+     "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "Discord",
+    "WoW",
+    "Grouping",
+    "JavaScript",
+    "MongoDB",
+    "Chat"
+  ],
+  "author": "Zachary Goldberg",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "mongodb": "^3.2.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
