@@ -2,4 +2,6 @@
 A Discord Bot for WoW Discord servers written in Node JS with MongoDB integration
 <br />
 <h2>Commands</h2>
-None implemented yet check back later!
+!Setup Name Level Class Profession Profession - Adds a character to the database
+!Level - Levels up saved character
+
