@@ -4,8 +4,8 @@
   "description": "A Discord Bot for WoW Discord servers written in Node JS with MongoDB integration ",
   "main": "index.js",
   "scripts": {
-     "start": "node index.js",
-     "dev": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [
     "Discord",
@@ -22,6 +22,7 @@
     "mongodb": "^3.2.7"
   },
   "devDependencies": {
+    "dotenv": "^8.0.0",
     "nodemon": "^1.19.1"
   }
 }

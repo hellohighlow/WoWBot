@@ -1,24 +1,40 @@
 const mongo = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017';
+const ObjectID = require('mongodb').ObjectID;
+require('dotenv').config({path: __dirname + '/.env'});
+const url = process.env.URL;
+
+var collection;
+mongo.connect(url, function(err, db){
+	if(err) console.log(err);
+	collection = db.db('Players').collection('Mains');
+});
 
 module.exports = {
-	addPlayer:function(msg, id){
-		mongo.connect(url, (err, client) => {
-			if (err) {
-				console.error(err);
-				return;
-		  	}
-		  	const db = client.db('Players')
-		  	const collection = db.collection('Mains')
-		  	var data = msg.split(' ');
-		  	try{
-		  		collection.insertOne({'_id': id, 'name': data[1], 'lvl': data[2], 'class': data[3], 'pro1': data[4], 'pro2': data[5]});
-	  		}catch(e){
-		  		console.log(e);
-	  		}
-		  	client.close();
-		})
+	addPlayer: async function(msg, userID){
+		if(await exists(userID)){
+			console.log(userID);
+			return false;
+		}
+		var data = msg.split(' ');
+		collection.insertOne({'_id': ObjectID(userID), 'User': userID, 'Name': data[1], 'Level': data[2], 'Class': data[3], 'Pro1': data[4], 'Pro2': data[5]}	);
+		return true;
 	},
 
-	lvlUp:function(msg)
+	lvlUp: async function(msg, userID){
+		var data = msg.split(' ');
+		if(await !exists(userID))
+			return false;
+		collection.updateOne({_id: ObjectID(userID)},
+		{$set: {"Level": data[1]}},
+		{upsert: false});
+		return true;
+	}
+}
+
+async function exists(userID){
+	var player = await collection.findOne({_id: userID});
+	if(player != null){
+		return true;
+	}
+	return false;
 }
